@@ -1,0 +1,15 @@
+package {{package}};
+
+public class {{class}} extends RuntimeException {
+    private final {{annotated}} cause;
+
+    public {{class}}({{annotated}} cause) {
+        super(cause);
+        this.cause = cause;
+    }
+
+    @Override
+    public {{annotated}} getCause() {
+        return cause;
+    }
+}

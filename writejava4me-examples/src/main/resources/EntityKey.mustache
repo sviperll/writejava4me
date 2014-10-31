@@ -1,0 +1,39 @@
+package {{package}};
+
+public class {{class}} implements Comparable<{{class}}> {
+    private final int key;
+    public {{class}}(int key) {
+        this.key = key;
+    }
+
+    public int intValue() {
+        return key;
+    }
+
+    @Override
+    public String toString() {
+        return "new {{class}}(" + key + ")";
+    }
+
+    @Override
+    public int hashCode() {
+        return key;
+    }
+
+    @Override
+    public boolean equals(Object thatObject) {
+        if (this == thatObject)
+            return true;
+        else if (!(thatObject instanceof {{class}}))
+            return false;
+        else {
+            {{class}} that = ({{class}})thatObject;
+            return this.key == that.key;
+        }
+    }
+
+    @Override
+    public int compareTo({{class}} that) {
+        return this == that ? 0 : (this.key < that.key ? -1 : (this.key > that.key ? 1 : 0));
+    }
+}

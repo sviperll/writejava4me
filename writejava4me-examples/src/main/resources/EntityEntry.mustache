@@ -1,0 +1,18 @@
+package {{package}};
+
+public class {{class}} {
+    private final {{entity}}Key key;
+    private final {{annotated}} value;
+    public {{class}}({{entity}}Key key, {{annotated}} value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public {{entity}}Key key() {
+        return key;
+    }
+
+    public {{annotated}} value() {
+        return value;
+    }
+}

@@ -1,0 +1,9 @@
+*~
+/build
+/target
+/writejava4me/build
+/writejava4me/target
+/writejava4me-examples/build
+/writejava4me-examples/target
+/.nb-gradle
+/.gradle
