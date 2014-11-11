@@ -12,72 +12,80 @@ Imagine that we would like to define both checked exception and RuntimeException
 
 We can write it like this:
 
-    public class MyException extends Exception {
-        private final MyData valuableData;
-        public MyException(String message, MyData valuableData) {
-            super(message);
-            this.valuableData = valuableData;
-        }
-        public MyData valuableData() {
-            return valuableData;
-        }
+```java
+public class MyException extends Exception {
+    private final MyData valuableData;
+    public MyException(String message, MyData valuableData) {
+        super(message);
+        this.valuableData = valuableData;
     }
+    public MyData valuableData() {
+        return valuableData;
+    }
+}
 
-    public class RuntimeMyException extends RuntimeException {
-        private final MyException cause;
-        public RuntimeMyException(MyException cause) {
-            super(cause);
-            this.cause = cause;
-        }
-        @Override
-        public MyException getCause() {
-            return cause;
-        }
+public class RuntimeMyException extends RuntimeException {
+    private final MyException cause;
+    public RuntimeMyException(MyException cause) {
+        super(cause);
+        this.cause = cause;
     }
+    @Override
+    public MyException getCause() {
+        return cause;
+    }
+}
+```
 
 If we are going to define many exceptions pairs like this we may want to generate Runtime wrappers automatically.
 It will be good to have annotation for this.
 
-    @GenerateRuntimeExceptionWrapper
-    public class MyException extends Exception {
-        private final MyData valuableData;
-        public MyException(String message, MyData valuableData) {
-            super(message);
-            this.valuableData = valuableData;
-        }
-        public MyData valuableData() {
-            return valuableData;
-        }
+```java
+@GenerateRuntimeExceptionWrapper
+public class MyException extends Exception {
+    private final MyData valuableData;
+    public MyException(String message, MyData valuableData) {
+        super(message);
+        this.valuableData = valuableData;
     }
+    public MyData valuableData() {
+        return valuableData;
+    }
+}
+```
 
 With writejava4me it's easy to define such annotations. Here is an implementation for @GenerateRuntimeExceptionWrapper
 
 GenerateRuntimeExceptionWrapper.java:
 
-    @Retention(RetentionPolicy.SOURCE)
-    @Target(ElementType.TYPE)
-    @Documented
-    @GeneratesClass(classNameTemplateString = "Runtime{{annotated}}", classTemplateResourcePath = "RuntimeExceptionWrapper.mustache")
-    @interface GenerateRuntimeExceptionWrapper {
-    }
+```java
+@Retention(RetentionPolicy.SOURCE)
+@Target(ElementType.TYPE)
+@Documented
+@GeneratesClass(classNameTemplateString = "Runtime{{annotated}}", classTemplateResourcePath = "RuntimeExceptionWrapper.mustache")
+@interface GenerateRuntimeExceptionWrapper {
+}
+```
 
 RuntimeExceptionWrapper.mustache located in resources folder:
 
-    package {{package}};
+```java
+package {{package}};
 
-    public class {{class}} extends RuntimeException {
-        private final {{annotated}} cause;
+public class {{class}} extends RuntimeException {
+    private final {{annotated}} cause;
 
-        public {{class}}({{annotated}} cause) {
-            super(cause);
-            this.cause = cause;
-        }
-
-        @Override
-        public {{annotated}} getCause() {
-            return cause;
-        }
+    public {{class}}({{annotated}} cause) {
+        super(cause);
+        this.cause = cause;
     }
+
+    @Override
+    public {{annotated}} getCause() {
+        return cause;
+    }
+}
+```
 
 See [examples project](https://github.com/sviperll/writejava4me/tree/master/writejava4me-examples) for more examples
 
