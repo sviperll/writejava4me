@@ -34,6 +34,7 @@ package com.github.sviperll.writejava4me.examples;
  * @author Victor Nazarov <asviraspossible@gmail.com>
  */
 @GenerateRuntimeExceptionWrapper
+@SuppressWarnings("serial")
 public class MyException extends Exception {
     public MyException(String message) {
         super(message);

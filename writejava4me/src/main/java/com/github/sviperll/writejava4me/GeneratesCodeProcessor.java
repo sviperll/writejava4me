@@ -38,10 +38,9 @@ import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.lang.annotation.Annotation;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -68,8 +67,8 @@ import javax.tools.JavaFileObject;
 @SupportedAnnotationTypes("*")
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
 public class GeneratesCodeProcessor extends AbstractProcessor {
-    private Map<TypeElement, GeneratesClass[]> annotations = new HashMap<TypeElement, GeneratesClass[]>();
-    private List<String> errors = new ArrayList<String>();
+    private final Map<TypeElement, GeneratesClass[]> annotations = new HashMap<TypeElement, GeneratesClass[]>();
+    private final List<String> errors = new ArrayList<String>();
 
     @Override
     public boolean process(Set<? extends TypeElement> processEnnotations,
@@ -141,7 +140,7 @@ public class GeneratesCodeProcessor extends AbstractProcessor {
                 JavaFileObject sourceFile = processingEnv.getFiler().createSourceFile(packageName + "." + className, element);
                 OutputStream stream = sourceFile.openOutputStream();
                 try {
-                    Writer writer = new OutputStreamWriter(stream);
+                    Writer writer = new OutputStreamWriter(stream, Charset.defaultCharset());
                     try {
                         mustache.execute(writer, scope);
                     } finally {
