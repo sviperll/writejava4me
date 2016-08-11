@@ -31,7 +31,7 @@ package com.github.sviperll.writejava4me.examples;
 
 /**
  *
- * @author Victor Nazarov <asviraspossible@gmail.com>
+ * @author Victor Nazarov &lt;asviraspossible@gmail.com&gt;
  */
 @GenerateKeyAndEntry(entity = "User")
 public class UserAttributes {
