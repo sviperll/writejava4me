@@ -13,6 +13,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <netbeans.hint.license>BSD3</netbeans.hint.license>
+        <parent.profile.activate>!java6,!pitest-report,java8,nexus-deploy</parent.profile.activate>
     </properties>
     <modules>
         <module>writejava4me</module>
