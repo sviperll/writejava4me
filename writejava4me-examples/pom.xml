@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.github.sviperll</groupId>
         <artifactId>writejava4me-maven-parent</artifactId>
-        <version>0.3-SNAPSHOT</version>
+        <version>0.3</version>
     </parent>
     <artifactId>writejava4me-examples</artifactId>
     <name>writejava4me-examples</name>

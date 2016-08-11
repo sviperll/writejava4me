@@ -9,7 +9,7 @@
     <artifactId>writejava4me-maven-parent</artifactId>
     <name>writejava4me-maven-parent</name>
     <packaging>pom</packaging>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.3</version>
     <url>http://maven.apache.org</url>
     <properties>
         <netbeans.hint.license>BSD3</netbeans.hint.license>
@@ -23,7 +23,7 @@
         <connection>scm:git:git://github.com/sviperll/writejava4me.git</connection>
         <developerConnection>scm:git:git@github.com:sviperll/writejava4me.git</developerConnection>
         <url>https://github.com/sviperll/writejava4me</url>
-      <tag>HEAD</tag>
+      <tag>writejava4me-0.3</tag>
   </scm>
     <licenses>
         <license>
