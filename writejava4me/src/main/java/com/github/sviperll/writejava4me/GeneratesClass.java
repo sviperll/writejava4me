@@ -39,7 +39,7 @@ import java.lang.annotation.Target;
  *
  * @author Victor Nazarov <asviraspossible@gmail.com>
  */
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.ANNOTATION_TYPE)
 @Documented
 public @interface GeneratesClass {

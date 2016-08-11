@@ -78,15 +78,20 @@ public class GeneratesCodeProcessor extends AbstractProcessor {
                 processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, error);
             }
         } else {
-            for (Element element: roundEnv.getElementsAnnotatedWith(GeneratesCode.class)) {
-                TypeElement annotationClassElement = (TypeElement)element;
-                GeneratesClass[] generatesDirectives = element.getAnnotation(GeneratesCode.class).value();
-                annotations.put(annotationClassElement, generatesDirectives);
-            }
-            for (Element element: roundEnv.getElementsAnnotatedWith(GeneratesClass.class)) {
-                TypeElement annotationClassElement = (TypeElement)element;
-                GeneratesClass[] generatesDirectives = new GeneratesClass[] {element.getAnnotation(GeneratesClass.class)};
-                annotations.put(annotationClassElement, generatesDirectives);
+            for (Element element: roundEnv.getRootElements()) {
+
+                for (AnnotationMirror annotation: element.getAnnotationMirrors()) {
+                    TypeElement annotationType = (TypeElement)annotation.getAnnotationType().asElement();
+                    GeneratesCode generatesCode = annotationType.getAnnotation(GeneratesCode.class);
+                    if (generatesCode != null) {
+                        annotations.put(annotationType, generatesCode.value());
+                    } else {
+                        GeneratesClass generatesClass = annotationType.getAnnotation(GeneratesClass.class);
+                        if (generatesClass != null) {
+                            annotations.put(annotationType, new GeneratesClass[] {generatesClass});
+                        }
+                    }
+                }
             }
             Generator generator = new Generator(processingEnv, new DefaultMustacheFactory());
             for (Entry<TypeElement, GeneratesClass[]> entry: annotations.entrySet()) {
@@ -125,8 +130,6 @@ public class GeneratesCodeProcessor extends AbstractProcessor {
             HashMap<String, Object> annotationScope = toScope(annotation);
             annotationScope.put("this", thisScope);
             Object[] scope = new Object[] {annotationScope, thisScope};
-            System.out.println("annotationScope = " + annotationScope);
-            System.out.println("thisScope = " + thisScope);
 
             Mustache classNameMustache = mustacheFactory.compile(new StringReader(directive.classNameTemplateString()), "classNameTemplateString");
             StringWriter stringWriter = new StringWriter();

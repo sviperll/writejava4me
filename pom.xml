@@ -2,14 +2,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.sviperll</groupId>
-        <artifactId>sviperll-maven-parent-6</artifactId>
-        <version>3.1</version>
+        <artifactId>universal-maven-parent</artifactId>
+        <version>0.21</version>
     </parent>
     <groupId>com.github.sviperll</groupId>
     <artifactId>writejava4me-maven-parent</artifactId>
     <name>writejava4me-maven-parent</name>
     <packaging>pom</packaging>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.3-SNAPSHOT</version>
     <url>http://maven.apache.org</url>
     <properties>
         <netbeans.hint.license>BSD3</netbeans.hint.license>
